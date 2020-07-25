@@ -25,8 +25,14 @@ def getFutureContestList():
     html=urllib.request.urlopen(contestsurl)
     soup=BS(html,"lxml")
     div = soup.find('div', id='contest-table-upcoming')
+    if div is None:
+        return []
     table=div.find('table')
+    if table is None:
+        return []
     cs=table.select('tbody > tr')
+    if cs is None:
+        return []
     for c in cs:
         contest=c.findAll('td')
 
